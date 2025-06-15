@@ -1,7 +1,9 @@
 import { ZodSchema } from "zod";
+
 import { Request, Response, NextFunction } from "express";
 
 export const validate = (schemea: ZodSchema<any>) => (req:Request, res:Response, next: NextFunction) => {
+    console.log(req.body);
     const result = schemea.safeParse(req.body);
     if(!result.success){
          res.status(400).json({

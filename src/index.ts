@@ -1,13 +1,12 @@
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
-import authRouter from './routes/auth.routes';
+import authRouter from './routes/auth.routes.ts';
+import connectDB from './config/mongodb.config.ts';
 
-dotenv.config();
+connectDB();
 
 const app = express();
-
-app.use(cors()); 
+app.use(cors());
 app.use(express.json());
 
 app.get('/api/ping', (_req,res) => {
@@ -15,7 +14,7 @@ app.get('/api/ping', (_req,res) => {
      res.status(200).json({"message":"Backend is running"});
 });
 
-// app.use('/auth', authRouter); 
+app.use('/api/auth', authRouter);
 
 const PORT = process.env.PORT || 4000;
 
