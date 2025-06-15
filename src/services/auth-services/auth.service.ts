@@ -13,7 +13,7 @@ const authService = {
             const hashedPassword = await bcrypt.hash(password, 10);
                       
             const user = await User.create({ name, email, password:hashedPassword });
-            const token = generateToken(user.id.toString());
+            const token = generateToken(user.userId);
             
             return {
                 message: 'User registered successfully',
